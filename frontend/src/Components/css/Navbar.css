@@ -1,0 +1,180 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #2b2b2b;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+a{
+  text-decoration: none;
+
+}
+.navbar-brand h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  
+
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.3s;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+.profile-container {
+  position: relative;
+}
+
+.profile-icon {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.profile-icon:hover {
+  opacity: 0.8;
+}
+
+.profile-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background-color: #3a3a3a;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  min-width: 250px;
+  padding: 15px;
+  z-index: 1001;
+}
+
+.dropdown-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #4a4a4a;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-label {
+  font-size: 12px;
+  color: #a0a0a0;
+  font-weight: 500;
+}
+
+.dropdown-value {
+  font-size: 14px;
+  color: white;
+  font-weight: 400;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .navbar-brand h1 {
+    font-size: 20px;
+  }
+
+  .navbar-menu {
+    gap: 15px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+
+  .profile-icon img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .profile-dropdown {
+    min-width: 200px;
+    right: -10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 15px;
+  }
+
+  .navbar-brand h1 {
+    font-size: 18px;
+  }
+
+  .navbar-menu {
+    gap: 10px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+  }
+
+  .profile-icon img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .profile-dropdown {
+    min-width: 180px;
+    padding: 10px;
+    right: -15px;
+    top: 50px;
+  }
+
+  .dropdown-item {
+    padding: 10px 0;
+  }
+
+  .dropdown-label {
+    font-size: 11px;
+  }
+
+  .dropdown-value {
+    font-size: 13px;
+  }
+}
+
+.score-item {
+  cursor: pointer;
+}
+
+.blurred {
+  filter: blur(4px);
+  letter-spacing: 2px;
+  user-select: none;
+}

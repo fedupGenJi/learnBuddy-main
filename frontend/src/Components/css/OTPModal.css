@@ -1,0 +1,156 @@
+.otp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.otp-modal {
+  background-color: #3a3a3a;
+  border-radius: 20px;
+  padding: 30px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.otp-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.otp-modal-header h2 {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+
+.close-btn:hover {
+  opacity: 0.7;
+}
+
+.otp-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.otp-modal-body p {
+  color: #a0a0a0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.otp-modal-body input {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #4a4a4a;
+  border-radius: 25px;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.otp-modal-body input:focus {
+  outline: none;
+  border-color: #6a6a6a;
+}
+
+.otp-modal-body input.error-input {
+  border-color: #ff4444;
+}
+
+.otp-modal-body input::placeholder {
+  color: #6a6a6a;
+  letter-spacing: normal;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 14px;
+  margin: -10px 0 0 0;
+  text-shadow: 0 0 8px rgba(255, 68, 68, 0.6);
+}
+
+.verify-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(90deg, #4a90e2 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.verify-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.verify-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.resend-btn {
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  color: #4a90e2;
+  border: 2px solid #4a90e2;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.resend-btn:hover:not(:disabled) {
+  background: #4a90e2;
+  color: white;
+}
+
+.resend-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .otp-modal {
+    padding: 20px;
+    width: 350px;
+  }
+
+  .otp-modal-header h2 {
+    font-size: 20px;
+  }
+}
