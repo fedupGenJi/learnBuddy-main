@@ -14,6 +14,7 @@ from core.models import Temp
 from core.utils import generate_otp
 import json
 import requests
+import random
 
 @api_view(["POST"])
 def signup_user(request):
@@ -219,23 +220,41 @@ def api_get_question(request):
     options = data_block.get("options", {})
     correct_key = data_block.get("correct_option")
 
+    # Shuffle options and explanations together
+    keys = ["A", "B", "C", "D"]
+    shift = random.randint(0, 3)
+
+    # Rotate options
+    rotated_options = {}
+    for i, k in enumerate(keys):
+        new_key = keys[(i + shift) % 4]
+        rotated_options[new_key] = options.get(k, "")
+
+    orig_rationales = data_block.get("distractor_rationales", {})
+    answer_exp = data_block.get("answer_explanation", "")
+
+    rotated_explanations = {}
+    for i, k in enumerate(keys):
+        new_key = keys[(i + shift) % 4]
+        if k == correct_key:
+            rotated_explanations[new_key] = answer_exp
+        else:
+            rotated_explanations[new_key] = orig_rationales.get(k, "")
+
+    correct_index = keys.index(correct_key)
+    new_correct_key = keys[(correct_index + shift) % 4]
+
     formatted = {
         "question": data_block.get("question"),
 
         "options": [
-            f"A. {options.get('A', '')}",
-            f"B. {options.get('B', '')}",
-            f"C. {options.get('C', '')}",
-            f"D. {options.get('D', '')}",
+            f"{k}. {rotated_options[k]}" for k in keys
         ],
 
-        "correct_answer": f"{correct_key}. {options.get(correct_key, '')}",
+        "correct_answer": f"{new_correct_key}. {rotated_options[new_correct_key]}",
 
         "explanations": [
-            f"A: {data_block.get('distractor_rationales', {}).get('A', '')}",
-            f"B: {data_block.get('distractor_rationales', {}).get('B', '')}",
-            f"C: {data_block.get('answer_explanation', '')}",
-            f"D: {data_block.get('distractor_rationales', {}).get('D', '')}",
+            f"{k}: {rotated_explanations[k]}" for k in keys
         ],
 
         "difficulty_used": difficulty

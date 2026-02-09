@@ -2,7 +2,11 @@
 This is the main backend of the learnBuddy Project that handles the authentications and so for the webapplication. 
 
 ---
-1. Open an virtual enviroment and download the dependencies like: python-dotenv psycopg2-binary
+1. Open a virtual environment and install the dependencies:
+```bash
+pip install -r requirements.txt
+```
+
 2. Create an .env file such that it has
 DB_NAME=
 DB_USER=
