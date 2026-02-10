@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { IoChatbubblesSharp } from 'react-icons/io5';
+import { IoClose, IoSend } from 'react-icons/io5';
 import './css/Chatbot.css';
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -8,8 +10,28 @@ const Chatbot = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const popupRef = useRef(null);
+  const iconRef = useRef(null);
 
   const toggleChat = () => setOpen(!open);
+
+  // Close popup when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (open && 
+          popupRef.current && 
+          !popupRef.current.contains(event.target) &&
+          iconRef.current &&
+          !iconRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open]);
 
   const sendQuestion = async () => {
     if (!input.trim()) return;
@@ -85,18 +107,23 @@ const Chatbot = () => {
   return (
     <>
       {/* Chatbot icon */}
-      <div className="chatbot-container" onClick={toggleChat}>
+      <div ref={iconRef} className="chatbot-container" onClick={toggleChat}>
         <div className="chatbot-icon">
-          💬
+          <IoChatbubblesSharp size={40} />
         </div>
       </div>
 
       {/* Popup */}
       {open && (
-        <div className="chatbot-popup">
+        <div ref={popupRef} className="chatbot-popup">
           <div className="chatbot-header">
-            Chatbot
-            <span onClick={toggleChat}>✖</span>
+            <span className="header-title">
+              <IoChatbubblesSharp size={20} />
+              <span>LearnBuddy Assistant</span>
+            </span>
+            <button className="close-btn" onClick={toggleChat}>
+              <IoClose size={24} />
+            </button>
           </div>
 
           <div className="chatbot-messages">
@@ -124,7 +151,9 @@ const Chatbot = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyPress}
             />
-            <button onClick={sendQuestion}>Send</button>
+            <button onClick={sendQuestion} disabled={loading || !input.trim()}>
+              <IoSend size={20} />
+            </button>
           </div>
         </div>
       )}
